@@ -1,31 +1,34 @@
-i#include "main.h"
+#include "main.h"
 
 /**
- * _atoi - print reverse characters.
- * @s: Array
- *
- * Return: Always 0.
+ * _atoi - convert a string to an integer.
+ * @s: char type string
+ * Return: integer converted
  */
+
 int _atoi(char *s)
 {
-	int i = 0, sign = 1;
-	unsigned int num = 0;
+	int i;
 
-	while (s[i] != '\0')
+	int res = 0;
+
+	int sig = -1;
+
+	int brk = 0;
+
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		if ((s[i] < '0' || s[i] > '9') && (s[i] == '-'))
+		if (s[i] == '-')
+			sig = sig * -1;
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			sign = sign * -1;
+			res = res * 10;
+			res -= (s[i] - '0');
+			brk = 1;
 		}
-		else if ((s[i] >= '0' && s[i] <= '9'))
-		{
-			num = num * 10 + (s[i] - '0');
-			if ((s[i + 1] < '0' || s[i + 1] > '9'))
-			{
-				break;
-			}
-		}
-		i++;
+		else if (brk == 1)
+			break;
 	}
-	return (num * sign);
+	res = sig * res;
+	return (res);
 }
